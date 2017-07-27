@@ -129,10 +129,33 @@ class Team(list):
 		return riders;
 
 	"""
-	Override __bool__ method.
+	Lazy property, created when invoked.
 	"""
-	#def __bool__(self):
-	#	return super().__bool__(self);
+	@property
+	def totalriders(self):
+		if(self):
+			return len(self);
+
+		return 0;
+
+	"""
+	Lazy property, created when invoked.
+	"""
+	@property
+	def director(self):
+		return self._director;
+
+	"""
+	Setter and deleter for riders.
+	"""
+	@director.setter
+	def director(self, director):
+		self._director = director;
+
+	@director.deleter
+	def director(self):
+		self._director = None;
+
 
 """
 Composed class.
@@ -168,10 +191,22 @@ class StageRules:
 Main method
 """
 def main():
-	team = Team('Movistar', Cyclist('male','Spanish','Valverde'), Cyclist('male','Colombian','Quintana'), Cyclist('male','Basque','Izagirre'));
-	print(team);
-	team = Team('Sky', Cyclist('male','Basque','Landa'), Cyclist('male','Colombian','Henao'), Cyclist('male','Kenian','Froom'));
-	print(team);
+	# New team
+	mov = Team('Movistar', Cyclist('male','Spanish','Valverde'), Cyclist('male','Colombian','Quintana'), Cyclist('male','Basque','Izagirre'));
+	print(mov);
+	print('Num. de corredores: ', mov.totalriders);
+
+	# New team
+	sky = Team('Sky', Cyclist('male','Basque','Landa'), Cyclist('male','Colombian','Henao'), Cyclist('male','Kenian','Froom'));
+	print(sky);
+	print('Num. de corredores: ', sky.totalriders);
+
+	# Add director
+	mov.director = 'Unzue';
+	print(mov.director);
+
+	# List of attributes
+	# print(mov.__dir__());
 	
 if __name__ == "__main__":
 	main();
