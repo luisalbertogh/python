@@ -26,12 +26,13 @@ class Calculator:
 	def pi(self):
 	    return math.pi;
 	
-"""
-Class with standard decorators.
-"""
 # Automatic ordering
 @functools.total_ordering
 class Warrior:
+	"""
+	Class with standard decorators.
+	"""
+	# My init
 	def __init__(self, strength, life):
 		self.strength = strength;
 		self.life = life;
@@ -41,6 +42,9 @@ class Warrior:
 		return self.strength == other.strength and self.life == other.life;
 
 	def __lt__(self, other):
+		"""
+		This is my comment.
+		"""
 		return self.strength < other.strength and self.life < other.life;
 
 
@@ -71,6 +75,9 @@ def main():
 		logger.info('Warrior 1 wins');
 	else:
 		logger.info('Warrior 2 wins');
+
+	# Print basic help
+	help(Warrior);
 
 if __name__ == "__main__":
 	main();
