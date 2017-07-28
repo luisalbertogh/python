@@ -1,0 +1,33 @@
+version: 1
+handlers:
+  console:
+    class: logging.StreamHandler
+    stream: ext://sys.stderr
+    formatter: basic
+  mylogger:
+    class: logging.handlers.TimedRotatingFileHandler
+    filename: mylog.log
+    encoding: utf-8
+    formatter: basic
+    when: D # S - seconds, M - minutes, H - hours, D - Days, W0-W6 - weekday, midnight
+    interval: 1
+    backupCount: 5
+  mylogger2:
+    class: logging.handlers.RotatingFileHandler
+    filename: mylog2.log
+    encoding: utf-8
+    formatter: basic
+    backupCount: 5
+    maxBytes: 10485760 # 10 MB
+formatters:
+  basic:
+    style: "{"
+    format: "{levelname:s}:{name:s}:{message:s}"
+loggers:
+  MyLogger:
+    handlers: [console, mylogger, mylogger2]
+    level: DEBUG
+    propagate: False # Added
+root: # Added
+  handlers: [console]
+  level: INFO
